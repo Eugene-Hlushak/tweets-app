@@ -7,7 +7,8 @@ export const getUsers = async () => {
   return data;
 };
 
-export const updateUserFollowers = async ({ id, followers }) => {
+export const updateUserFollowers = async (id, followers) => {
   const res = await axios.put(`/users/${id}`, followers);
+  console.log(res);
   return res.data;
 };

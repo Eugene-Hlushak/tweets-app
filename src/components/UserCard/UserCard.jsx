@@ -1,12 +1,17 @@
-import { Card, Tweets, Followers, FollowButton } from "./UserCard.styled";
+import { Card, Tweets, Followers, FollowButton } from './UserCard.styled';
+import { updateUserFollowers } from 'services/fetchUsers';
 
-const UserCard = ({ name, id, avatar, tweets, followers, isFollow }) => {
+const UserCard = ({ user, toggleFollow }) => {
+  const { id, avatar, name, tweets, followers, isFollow } = user;
+
   return (
     <Card>
       <img src={avatar} alt={name} />
       <Tweets>{tweets} tweets</Tweets>
       <Followers>{followers} followers</Followers>
-      <FollowButton>Follow</FollowButton>
+      <FollowButton onClick={() => toggleFollow(id, isFollow, followers)}>
+        {isFollow ? 'Following' : 'Follow'}
+      </FollowButton>
     </Card>
   );
 };
