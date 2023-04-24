@@ -1,19 +1,26 @@
-import { Card, Tweets, Followers, FollowButton } from './UserCard.styled';
+import {
+  Card,
+  CardTitle,
+  FollowButton,
+  UserImg,
+  ImgThumb,
+} from './UserCard.styled';
 
 const UserCard = ({ user, toggleFollow }) => {
   const { id, avatar, name, tweets, followers, isFollow } = user;
 
   return (
     <Card>
-      <img src={avatar} alt={name} />
-      <Tweets>{tweets} tweets</Tweets>
-      <Followers>{followers} followers</Followers>
+      <ImgThumb>
+        <UserImg src={avatar} alt={name} />
+      </ImgThumb>
+      <CardTitle>{tweets} tweets</CardTitle>
+      <CardTitle style={{ marginBottom: '26px' }}>
+        {followers} followers
+      </CardTitle>
       <FollowButton
         follow={isFollow}
-        onClick={() => {
-          console.log(followers);
-          toggleFollow(id, followers, isFollow);
-        }}
+        onClick={() => toggleFollow(id, followers, isFollow)}
       >
         {isFollow ? 'Following' : 'Follow'}
       </FollowButton>

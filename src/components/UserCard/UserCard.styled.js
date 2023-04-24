@@ -3,9 +3,13 @@ import bg from '../../images/picture.png';
 import logo from '../../images/logo.png';
 
 export const Card = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
   width: 380px;
   height: 460px;
-
   text-align: center;
 
   background-image: url(${logo}), url(${bg}),
@@ -17,18 +21,47 @@ export const Card = styled.div`
   border-radius: 20px;
 `;
 
-export const Tweets = styled.p`
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 24px;
-  text-transform: uppercase;
+export const ImgThumb = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 26px;
+  border: 9px solid #ebd8ff;
+  box-shadow: 0px 4.39163px 4.39163px rgba(0, 0, 0, 0.06),
+    inset 0px -2.19582px 4.39163px #ae7be3,
+    inset 0px 4.39163px 3.29372px #fbf8ff;
+  border-radius: 50%;
 
-  color: #ebd8ff;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: block;
+    width: 380px;
+    height: 8px;
+    background-color: #ebd8ff;
+  }
 `;
 
-export const Followers = styled.p`
+export const UserImg = styled.img`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+`;
+
+export const CardTitle = styled.p`
+  margin-bottom: 16px;
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 500;

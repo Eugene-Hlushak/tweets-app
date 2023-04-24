@@ -9,6 +9,6 @@ export const getUsers = async () => {
 
 export const updateUserFollowers = async (id, followers) => {
   const res = await axios.put(`/users/${id}`, followers);
-  console.log(res);
-  return res.data;
+  console.log(res.status);
+  return res;
 };

@@ -4,21 +4,29 @@ import { getUsers, updateUserFollowers } from '../services/fetchUsers';
 import UsersList from '../components/UsersList/UsersList';
 
 const Tweets = () => {
+  const [users, setUsers] = useState([]);
   const [updatedUsers, setUpdatedUsers] = useState([]);
+  const [isLoad, setIsLoad] = useState(false);
+  const [isUserUpd, setIsUserUpd] = useState(false);
 
   useEffect(() => {
     const users = async () => {
-      const result = await getUsers();
-      const updUsers = result.map(user => {
-        return { ...user, isFollow: false };
-      });
-
-      const storageUsers = localStorage.getItem('updUsers');
-      if (storageUsers) {
-        setUpdatedUsers(JSON.parse(storageUsers));
-      } else {
-        localStorage.setItem('updUsers', JSON.stringify(updUsers));
-        setUpdatedUsers(() => JSON.parse(localStorage.getItem('updUsers')));
+      setIsLoad(true);
+      try {
+        const result = await getUsers();
+        const updUsers = result.map(user => {
+          return { ...user, isFollow: false };
+        });
+        const storageUsers = localStorage.getItem('updUsers');
+        if (storageUsers) {
+          setUpdatedUsers(JSON.parse(storageUsers));
+        } else {
+          localStorage.setItem('updUsers', JSON.stringify(updUsers));
+          setUpdatedUsers(() => JSON.parse(localStorage.getItem('updUsers')));
+        }
+      } catch (error) {
+      } finally {
+        setIsLoad(false);
       }
     };
     users();
@@ -43,18 +51,26 @@ const Tweets = () => {
   };
 
   const updateUser = async (id, followers, isFollow) => {
-    console.log(followers);
+    setIsUserUpd(true);
     let data;
     !isFollow
       ? (data = { followers: followers + 1 })
       : (data = { followers: followers - 1 });
-
-    await updateUserFollowers(id, data);
+    try {
+      await updateUserFollowers(id, data);
+    } catch (error) {
+    } finally {
+      setIsUserUpd(false);
+    }
   };
 
   return (
     <div>
-      <UsersList users={updatedUsers} toggleFollow={toggleFollow} />
+      {isLoad ? (
+        <div>Loading...</div>
+      ) : (
+        <UsersList users={updatedUsers} toggleFollow={toggleFollow} />
+      )}
     </div>
   );
 };
