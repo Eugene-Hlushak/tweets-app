@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react';
-import { getUsers } from '../services/fetchUsers';
+import { getUsers, updateUserFollowers } from '../services/fetchUsers';
 
 import UsersList from '../components/UsersList/UsersList';
 
 const Tweets = () => {
   const [updatedUsers, setUpdatedUsers] = useState([]);
-
-  // забираю всіх юзерів, додаю їх в localStorage і модифікую новим значенням isFollow,
-  // а також з ціих модифікованих відмальовую розмітку
 
   useEffect(() => {
     const users = async () => {
