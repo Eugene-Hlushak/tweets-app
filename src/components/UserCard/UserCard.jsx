@@ -10,7 +10,10 @@ const UserCard = ({ user, toggleFollow }) => {
       <Followers>{followers} followers</Followers>
       <FollowButton
         follow={isFollow}
-        onClick={() => toggleFollow(id, isFollow, followers)}
+        onClick={() => {
+          console.log(followers);
+          toggleFollow(id, followers, isFollow);
+        }}
       >
         {isFollow ? 'Following' : 'Follow'}
       </FollowButton>

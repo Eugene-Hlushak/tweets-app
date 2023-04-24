@@ -24,7 +24,7 @@ const Tweets = () => {
     users();
   }, []);
 
-  const toggleFollow = id => {
+  const toggleFollow = async (id, followers, isFollow) => {
     const updFollowers = JSON.parse(localStorage.getItem('updUsers')).map(
       user =>
         user.id === id
@@ -39,6 +39,17 @@ const Tweets = () => {
     );
     localStorage.setItem('updUsers', JSON.stringify(updFollowers));
     setUpdatedUsers(() => JSON.parse(localStorage.getItem('updUsers')));
+    await updateUser(id, followers, isFollow);
+  };
+
+  const updateUser = async (id, followers, isFollow) => {
+    console.log(followers);
+    let data;
+    !isFollow
+      ? (data = { followers: followers + 1 })
+      : (data = { followers: followers - 1 });
+
+    await updateUserFollowers(id, data);
   };
 
   return (
