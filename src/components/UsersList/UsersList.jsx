@@ -14,7 +14,7 @@ const UsersList = () => {
       const updUsers = result.map(user => {
         return { ...user, isFollow: false };
       });
-      console.log(updUsers);
+
       const storageUsers = localStorage.getItem('updUsers');
       if (storageUsers) {
         setUpdatedUsers(JSON.parse(storageUsers));
@@ -25,6 +25,7 @@ const UsersList = () => {
     };
     users();
   }, []);
+
   return (
     <List>
       {updatedUsers.length > 0 &&

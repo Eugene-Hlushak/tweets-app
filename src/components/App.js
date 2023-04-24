@@ -1,7 +1,7 @@
-import { Route, Routes, Link } from "react-router-dom";
+import { Route, Routes, Link } from 'react-router-dom';
 
-import Tweets from "../pages/Tweets";
-import Home from "../pages/Home";
+import Tweets from '../pages/Tweets';
+import Home from '../pages/Home';
 
 function App() {
   return (
@@ -14,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/tweets" element={<Tweets />} />
+        <Route path="*" element={<Home />} />
       </Routes>
     </div>
   );
