@@ -23,7 +23,7 @@ const Tweets = () => {
     const fetchPageUsers = async () => {
       try {
         const result = await getUsers(page);
-        setUsers(prev => [...prev, ...result]);
+        setUsers([...users, ...result]);
       } catch (error) {}
     };
 
@@ -40,9 +40,9 @@ const Tweets = () => {
           return { ...user, isFollow: false };
         });
 
-        const storageUsers = JSON.parse(localStorage.getItem('updUsers'));
-        if (storageUsers) {
-          setUpdatedUsers(storageUsers);
+        const savedUsers = JSON.parse(localStorage.getItem('updUsers'));
+        if (savedUsers) {
+          setUpdatedUsers(savedUsers);
         } else {
           localStorage.setItem('updUsers', JSON.stringify(updUsers));
           setUpdatedUsers(() => JSON.parse(localStorage.getItem('updUsers')));
