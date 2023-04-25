@@ -9,8 +9,6 @@ const UsersList = ({ users, toggleFollow, selectedOption }) => {
   };
 
   const visibleUsers = filterUsers(users, selectedOption);
-  console.log(visibleUsers);
-
   return (
     <List>
       {visibleUsers.length > 0 &&

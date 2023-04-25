@@ -1,30 +1,67 @@
 import { useEffect, useState } from 'react';
-import { getUsers, updateUserFollowers } from '../services/fetchUsers';
+import {
+  getAllUsers,
+  updateUserFollowers,
+  getUsers,
+} from '../services/fetchUsers';
 import Filter from 'components/Filter/Filter';
 
 import UsersList from '../components/UsersList/UsersList';
 
 const Tweets = () => {
+  const [users, setUsers] = useState([]);
   const [updatedUsers, setUpdatedUsers] = useState([]);
   const [isLoad, setIsLoad] = useState(false);
   const [option, setOption] = useState('all');
+  const [page, setPage] = useState(1);
 
   const filterHandler = e => {
     setOption(e.target.value);
-    console.log(option);
   };
 
   useEffect(() => {
-    const users = async () => {
+    const fetchPageUsers = async () => {
+      try {
+        const result = await getUsers(page);
+        setUsers(prev => [...prev, ...result]);
+
+        console.log('result ', result);
+
+        const renewUsers = result.map(user => {
+          return { ...user, isFollow: false };
+        });
+        console.log('renewUsers ', renewUsers);
+
+        // const storageUsers = localStorage.getItem('pageUsers');
+        // if (storageUsers) {
+        //   localStorage.setItem(
+        //     'updUsers',
+        //     JSON.stringify([...storageUsers, ...updUsers])
+        //   );
+        //   setUpdatedUsers(JSON.parse(storageUsers));
+        // } else {
+        //   localStorage.setItem('pageUsers', JSON.stringify(updUsers));
+        //   setUpdatedUsers(() => JSON.parse(localStorage.getItem('pageUsers')));
+        // }s
+      } catch (error) {}
+    };
+    fetchPageUsers();
+  }, [page]);
+  console.log('users ', users);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
       setIsLoad(true);
       try {
-        const result = await getUsers();
+        const result = await getAllUsers();
+
         const updUsers = result.map(user => {
           return { ...user, isFollow: false };
         });
-        const storageUsers = localStorage.getItem('updUsers');
+
+        const storageUsers = JSON.parse(localStorage.getItem('updUsers'));
         if (storageUsers) {
-          setUpdatedUsers(JSON.parse(storageUsers));
+          setUpdatedUsers(storageUsers);
         } else {
           localStorage.setItem('updUsers', JSON.stringify(updUsers));
           setUpdatedUsers(() => JSON.parse(localStorage.getItem('updUsers')));
@@ -34,7 +71,7 @@ const Tweets = () => {
         setIsLoad(false);
       }
     };
-    users();
+    fetchUsers();
   }, []);
 
   const toggleFollow = async (id, followers, isFollow) => {
@@ -65,17 +102,23 @@ const Tweets = () => {
     } catch (error) {}
   };
 
+  const LoadMore = () => {
+    setPage(prev => prev + 1);
+  };
   return (
     <div>
       <Filter filterHandler={filterHandler} />
       {isLoad ? (
         <div>Loading...</div>
       ) : (
-        <UsersList
-          users={updatedUsers}
-          toggleFollow={toggleFollow}
-          selectedOption={option}
-        />
+        <>
+          <UsersList
+            users={updatedUsers}
+            toggleFollow={toggleFollow}
+            selectedOption={option}
+          />
+          <button onClick={LoadMore}>LoadMore</button>
+        </>
       )}
     </div>
   );
