@@ -1,13 +1,18 @@
 import { useEffect, useState } from 'react';
 import { getUsers, updateUserFollowers } from '../services/fetchUsers';
+import Filter from 'components/Filter/Filter';
 
 import UsersList from '../components/UsersList/UsersList';
 
 const Tweets = () => {
-  // const [users, setUsers] = useState([]);
   const [updatedUsers, setUpdatedUsers] = useState([]);
   const [isLoad, setIsLoad] = useState(false);
-  // const [isUserUpd, setIsUserUpd] = useState(false);
+  const [option, setOption] = useState('all');
+
+  const filterHandler = e => {
+    setOption(e.target.value);
+    console.log(option);
+  };
 
   useEffect(() => {
     const users = async () => {
@@ -51,25 +56,26 @@ const Tweets = () => {
   };
 
   const updateUser = async (id, followers, isFollow) => {
-    // setIsUserUpd(true);
     let data;
     !isFollow
       ? (data = { followers: followers + 1 })
       : (data = { followers: followers - 1 });
     try {
       await updateUserFollowers(id, data);
-    } catch (error) {
-      // } finally {
-      // setIsUserUpd(false);
-    }
+    } catch (error) {}
   };
 
   return (
     <div>
+      <Filter filterHandler={filterHandler} />
       {isLoad ? (
         <div>Loading...</div>
       ) : (
-        <UsersList users={updatedUsers} toggleFollow={toggleFollow} />
+        <UsersList
+          users={updatedUsers}
+          toggleFollow={toggleFollow}
+          selectedOption={option}
+        />
       )}
     </div>
   );
