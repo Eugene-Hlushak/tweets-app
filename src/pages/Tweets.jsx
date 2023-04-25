@@ -4,8 +4,8 @@ import {
   updateUserFollowers,
   getUsers,
 } from '../services/fetchUsers';
+import { PageContainer } from './Pages.styled';
 import Filter from 'components/Filter/Filter';
-
 import UsersList from '../components/UsersList/UsersList';
 
 const Tweets = () => {
@@ -87,12 +87,12 @@ const Tweets = () => {
     setPage(prev => prev + 1);
   };
   return (
-    <div>
-      <Filter filterHandler={filterHandler} />
+    <PageContainer>
       {isLoad ? (
         <div>Loading...</div>
       ) : (
-        <>
+        <div>
+          <Filter filterHandler={filterHandler} />
           <UsersList
             users={users}
             updatedUsers={updatedUsers}
@@ -100,9 +100,9 @@ const Tweets = () => {
             selectedOption={option}
           />
           <button onClick={LoadMore}>LoadMore</button>
-        </>
+        </div>
       )}
-    </div>
+    </PageContainer>
   );
 };
 

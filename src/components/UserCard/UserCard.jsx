@@ -8,6 +8,7 @@ import {
 
 const UserCard = ({ user, toggleFollow }) => {
   const { id, avatar, name, tweets, followers, isFollow } = user;
+  const formatFollowers = new Intl.NumberFormat('en').format(followers);
 
   return (
     <Card>
@@ -16,7 +17,7 @@ const UserCard = ({ user, toggleFollow }) => {
       </ImgThumb>
       <CardTitle>{tweets} tweets</CardTitle>
       <CardTitle style={{ marginBottom: '26px' }}>
-        {followers} followers
+        {formatFollowers} followers
       </CardTitle>
       <FollowButton
         follow={isFollow}

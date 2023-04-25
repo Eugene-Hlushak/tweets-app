@@ -1,13 +1,15 @@
+import { FilterSelector, FilterBox, FilterLabel } from './Filter.styled';
+
 const Filter = ({ filterHandler }) => {
   return (
-    <label>
-      Show
-      <select onChange={filterHandler}>
+    <FilterBox>
+      <FilterLabel>Show</FilterLabel>
+      <FilterSelector onChange={filterHandler}>
         <option value="all">All</option>
         <option value="follow">Follow</option>
         <option value="following">Following</option>
-      </select>
-    </label>
+      </FilterSelector>
+    </FilterBox>
   );
 };
 
