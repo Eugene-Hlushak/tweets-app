@@ -4,7 +4,7 @@ import {
   updateUserFollowers,
   getUsers,
 } from '../services/fetchUsers';
-import { PageContainer } from './Pages.styled';
+import { PageContainer, LoadMoreBtn } from './Pages.styled';
 import Filter from 'components/Filter/Filter';
 import UsersList from '../components/UsersList/UsersList';
 
@@ -45,7 +45,7 @@ const Tweets = () => {
           setUpdatedUsers(savedUsers);
         } else {
           localStorage.setItem('updUsers', JSON.stringify(updUsers));
-          setUpdatedUsers(() => JSON.parse(localStorage.getItem('updUsers')));
+          setUpdatedUsers(JSON.parse(localStorage.getItem('updUsers')));
         }
       } catch (error) {
       } finally {
@@ -69,15 +69,14 @@ const Tweets = () => {
           : user
     );
     localStorage.setItem('updUsers', JSON.stringify(updFollowers));
-    setUpdatedUsers(() => JSON.parse(localStorage.getItem('updUsers')));
+    setUpdatedUsers(JSON.parse(localStorage.getItem('updUsers')));
     await updateUser(id, followers, isFollow);
   };
 
   const updateUser = async (id, followers, isFollow) => {
-    let data;
-    !isFollow
-      ? (data = { followers: followers + 1 })
-      : (data = { followers: followers - 1 });
+    const data = !isFollow
+      ? { followers: followers + 1 }
+      : { followers: followers - 1 };
     try {
       await updateUserFollowers(id, data);
     } catch (error) {}
@@ -86,6 +85,7 @@ const Tweets = () => {
   const LoadMore = () => {
     setPage(prev => prev + 1);
   };
+
   return (
     <PageContainer>
       {isLoad ? (
@@ -99,7 +99,7 @@ const Tweets = () => {
             toggleFollow={toggleFollow}
             selectedOption={option}
           />
-          <button onClick={LoadMore}>LoadMore</button>
+          <LoadMoreBtn onClick={LoadMore}>LoadMore</LoadMoreBtn>
         </div>
       )}
     </PageContainer>

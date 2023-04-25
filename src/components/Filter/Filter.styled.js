@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 
 export const FilterBox = styled.label`
-  display: block;
+  display: inline-block;
+  padding: 10px;
   margin-bottom: 20px;
+  border: 2px solid black;
+  border-radius: 8px;
 `;
 
 export const FilterLabel = styled.span`
@@ -19,6 +22,5 @@ export const FilterLabel = styled.span`
 export const FilterSelector = styled.select`
   width: 100px;
   height: 30px;
-  border-color: royalblue;
   border-radius: 8px;
 `;

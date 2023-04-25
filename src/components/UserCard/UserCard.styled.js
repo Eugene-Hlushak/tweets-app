@@ -77,7 +77,7 @@ export const CardTitle = styled.p`
 export const FollowButton = styled.button`
   padding: 14px 56px;
   font-family: 'Montserrat';
-  font-style: normal;
+
   font-weight: 600;
   font-size: 18px;
   line-height: 22px;
