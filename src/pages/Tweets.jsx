@@ -24,30 +24,11 @@ const Tweets = () => {
       try {
         const result = await getUsers(page);
         setUsers(prev => [...prev, ...result]);
-
-        console.log('result ', result);
-
-        const renewUsers = result.map(user => {
-          return { ...user, isFollow: false };
-        });
-        console.log('renewUsers ', renewUsers);
-
-        // const storageUsers = localStorage.getItem('pageUsers');
-        // if (storageUsers) {
-        //   localStorage.setItem(
-        //     'updUsers',
-        //     JSON.stringify([...storageUsers, ...updUsers])
-        //   );
-        //   setUpdatedUsers(JSON.parse(storageUsers));
-        // } else {
-        //   localStorage.setItem('pageUsers', JSON.stringify(updUsers));
-        //   setUpdatedUsers(() => JSON.parse(localStorage.getItem('pageUsers')));
-        // }s
       } catch (error) {}
     };
+
     fetchPageUsers();
   }, [page]);
-  console.log('users ', users);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -113,7 +94,8 @@ const Tweets = () => {
       ) : (
         <>
           <UsersList
-            users={updatedUsers}
+            users={users}
+            updatedUsers={updatedUsers}
             toggleFollow={toggleFollow}
             selectedOption={option}
           />
