@@ -4,10 +4,10 @@ import { getUsers, updateUserFollowers } from '../services/fetchUsers';
 import UsersList from '../components/UsersList/UsersList';
 
 const Tweets = () => {
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
   const [updatedUsers, setUpdatedUsers] = useState([]);
   const [isLoad, setIsLoad] = useState(false);
-  const [isUserUpd, setIsUserUpd] = useState(false);
+  // const [isUserUpd, setIsUserUpd] = useState(false);
 
   useEffect(() => {
     const users = async () => {
@@ -51,7 +51,7 @@ const Tweets = () => {
   };
 
   const updateUser = async (id, followers, isFollow) => {
-    setIsUserUpd(true);
+    // setIsUserUpd(true);
     let data;
     !isFollow
       ? (data = { followers: followers + 1 })
@@ -59,8 +59,8 @@ const Tweets = () => {
     try {
       await updateUserFollowers(id, data);
     } catch (error) {
-    } finally {
-      setIsUserUpd(false);
+      // } finally {
+      // setIsUserUpd(false);
     }
   };
 

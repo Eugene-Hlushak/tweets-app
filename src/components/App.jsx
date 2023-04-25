@@ -1,16 +1,24 @@
-export const App = () => {
+import { Route, Routes, Link } from 'react-router-dom';
+import { GlobalStyle } from './GlobalStyle';
+import Tweets from '../pages/Tweets';
+import Home from '../pages/Home';
+
+function App() {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
+    <div>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/tweets">Tweets</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/tweets" element={<Tweets />} />
+        <Route path="*" element={<Home />} />
+      </Routes>
+      <GlobalStyle />
     </div>
   );
-};
+}
+
+export default App;

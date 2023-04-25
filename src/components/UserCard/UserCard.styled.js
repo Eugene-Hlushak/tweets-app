@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import bg from '../../images/picture.png';
 import logo from '../../images/logo.png';
 
-export const Card = styled.div`
+export const Card = styled.li`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -10,6 +10,7 @@ export const Card = styled.div`
   align-items: center;
   width: 380px;
   height: 460px;
+  padding-bottom: 36px;
   text-align: center;
 
   background-image: url(${logo}), url(${bg}),
@@ -19,29 +20,13 @@ export const Card = styled.div`
   background-repeat: no-repeat;
   box-shadow: -2.5777px 6.87386px 20.6216px rgba(0, 0, 0, 0.23);
   border-radius: 20px;
-`;
-
-export const ImgThumb = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
-  width: 80px;
-  height: 80px;
-  margin-bottom: 26px;
-  border: 9px solid #ebd8ff;
-  box-shadow: 0px 4.39163px 4.39163px rgba(0, 0, 0, 0.06),
-    inset 0px -2.19582px 4.39163px #ae7be3,
-    inset 0px 4.39163px 3.29372px #fbf8ff;
-  border-radius: 50%;
 
   &::after {
     content: '';
     position: absolute;
-    top: 50%;
+    top: 214px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
 
     display: block;
     width: 380px;
@@ -50,13 +35,28 @@ export const ImgThumb = styled.div`
   }
 `;
 
-export const UserImg = styled.img`
+export const ImgThumb = styled.div`
   position: absolute;
-  top: 50%;
+  top: 178px;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
+  z-index: 100;
   width: 80px;
   height: 80px;
+  border: 9px solid #ebd8ff;
+  box-shadow: 0px 4.39163px 4.39163px rgba(0, 0, 0, 0.06),
+    inset 0px -2.19582px 4.39163px #ae7be3,
+    inset 0px 4.39163px 3.29372px #fbf8ff;
+  border-radius: 50%;
+`;
+
+export const UserImg = styled.img`
+  /* position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+  width: 62px;
+  height: 62px;
   border-radius: 50%;
 `;
 
@@ -75,7 +75,14 @@ export const CardTitle = styled.p`
 export const FollowButton = styled.button`
   width: 196px;
   height: 50px;
-  background: ${props => (props.follow ? `#5CD3A8` : `#ebd8ff`)};
+  background-color: ${props => (props.follow ? `#5CD3A8` : `#ebd8ff`)};
   box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25);
+  /* box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25); */
   border-radius: 10.3108px;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background-color: ${props => (props.follow ? `#ebd8ff` : `#5CD3A8`)};
+  }
 `;
