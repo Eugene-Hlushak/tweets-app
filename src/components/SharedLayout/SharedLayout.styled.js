@@ -12,12 +12,13 @@ export const HeaderContainer = styled.div`
 export const Nav = styled.nav``;
 
 export const Link = styled(NavLink)`
+  display: inline-block;
   margin-right: 10px;
-  width: 100px;
+  width: 80px;
   padding: 10px;
   border: 2px solid black;
   border-radius: 8px;
-
+  text-align: center;
   text-decoration: none;
   color: black;
   &.active {

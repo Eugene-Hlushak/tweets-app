@@ -75,6 +75,7 @@ export const CardTitle = styled.p`
 `;
 
 export const FollowButton = styled.button`
+  width: 230px;
   padding: 14px 56px;
   font-family: 'Montserrat';
 
@@ -90,8 +91,7 @@ export const FollowButton = styled.button`
 
   cursor: pointer;
 
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: ${props => (props.follow ? `#ebd8ff` : `#5CD3A8`)};
   }
 `;
