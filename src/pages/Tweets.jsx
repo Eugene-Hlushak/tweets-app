@@ -93,7 +93,6 @@ const Tweets = () => {
         <Spinner />
       ) : (
         <TweetsContainer>
-          
           <Filter filterHandler={filterHandler} />
           <UsersList
             users={users}

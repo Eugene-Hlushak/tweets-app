@@ -12,6 +12,6 @@ export const updateUserFollowers = async (id, followers) => {
   return res;
 };
 export const getUsers = async page => {
-  const { data } = await axios.get(`/users?page=${page}&limit=4`);
+  const { data } = await axios.get(`/users?page=${page}&limit=3`);
   return data;
 };
