@@ -1,4 +1,4 @@
-import { Route, Routes, Link } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { GlobalStyle } from './GlobalStyle';
 import SharedLayout from './SharedLayout/SharedLayout';
 import Tweets from '../pages/Tweets';
