@@ -105,7 +105,7 @@ const Tweets = () => {
             selectedOption={option}
             page={page}
           />
-          {Math.ceil(updatedUsers.length / 3) > page && (
+          {Math.ceil(updatedUsers.length / 3) > page && option === 'all' && (
             <LoadMoreBtn onClick={LoadMore}>LoadMore</LoadMoreBtn>
           )}
         </>
