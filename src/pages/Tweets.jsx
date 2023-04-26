@@ -4,7 +4,7 @@ import {
   updateUserFollowers,
   getUsers,
 } from '../services/fetchUsers';
-import { PageContainer, TweetsContainer, LoadMoreBtn } from './Pages.styled';
+import { TweetsContainer, LoadMoreBtn } from './Pages.styled';
 import Filter from 'components/Filter/Filter';
 import UsersList from '../components/UsersList/UsersList';
 import Spinner from 'components/Spinner/Spinner';
@@ -22,10 +22,15 @@ const Tweets = () => {
 
   useEffect(() => {
     const fetchPageUsers = async () => {
+      setIsLoad(true);
       try {
         const result = await getUsers(page);
         setUsers(prev => [...prev, ...result]);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoad(false);
+      }
     };
 
     fetchPageUsers();
@@ -49,6 +54,7 @@ const Tweets = () => {
           setUpdatedUsers(JSON.parse(localStorage.getItem('updUsers')));
         }
       } catch (error) {
+        console.log(error);
       } finally {
         setIsLoad(false);
       }
@@ -89,9 +95,7 @@ const Tweets = () => {
 
   return (
     <TweetsContainer>
-      {isLoad ? (
-        <Spinner />
-      ) : (
+      {users.length > 0 && (
         <>
           <Filter filterHandler={filterHandler} />
           <UsersList
@@ -99,10 +103,14 @@ const Tweets = () => {
             updatedUsers={updatedUsers}
             toggleFollow={toggleFollow}
             selectedOption={option}
+            page={page}
           />
-          <LoadMoreBtn onClick={LoadMore}>LoadMore</LoadMoreBtn>
+          {Math.ceil(updatedUsers.length / 3) > page && (
+            <LoadMoreBtn onClick={LoadMore}>LoadMore</LoadMoreBtn>
+          )}
         </>
       )}
+      {isLoad && <Spinner />}
     </TweetsContainer>
   );
 };

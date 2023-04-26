@@ -1,7 +1,24 @@
+import { useRef, useEffect } from 'react';
 import { List } from './UsersList.styled';
 import UserCard from '../UserCard/UserCard';
+import smoothScroll from 'services/smoothScroll';
 
-const UsersList = ({ users, updatedUsers, toggleFollow, selectedOption }) => {
+const UsersList = ({
+  users,
+  updatedUsers,
+  toggleFollow,
+  selectedOption,
+  page,
+}) => {
+  const listRef = useRef();
+
+  useEffect(() => {
+    if (page === 1) {
+      return;
+    }
+    smoothScroll(listRef.current);
+  });
+
   const filterUsers = (users, option) => {
     if (option === 'all') return users;
     if (option === 'follow') return users.filter(({ isFollow }) => !isFollow);
@@ -20,7 +37,7 @@ const UsersList = ({ users, updatedUsers, toggleFollow, selectedOption }) => {
 
   const visibleUsers = filterUsers(filteredUsersFromStorage(), selectedOption);
   return (
-    <List>
+    <List ref={listRef}>
       {visibleUsers.length > 0 &&
         visibleUsers.map(user => (
           <UserCard key={user.id} user={user} toggleFollow={toggleFollow} />
