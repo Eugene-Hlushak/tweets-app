@@ -88,11 +88,11 @@ const Tweets = () => {
   };
 
   return (
-    <PageContainer>
+    <TweetsContainer>
       {isLoad ? (
         <Spinner />
       ) : (
-        <TweetsContainer>
+        <>
           <Filter filterHandler={filterHandler} />
           <UsersList
             users={users}
@@ -101,9 +101,9 @@ const Tweets = () => {
             selectedOption={option}
           />
           <LoadMoreBtn onClick={LoadMore}>LoadMore</LoadMoreBtn>
-        </TweetsContainer>
+        </>
       )}
-    </PageContainer>
+    </TweetsContainer>
   );
 };
 
