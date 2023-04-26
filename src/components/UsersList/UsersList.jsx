@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useRef, useEffect } from 'react';
 import { List } from './UsersList.styled';
 import UserCard from '../UserCard/UserCard';
@@ -44,6 +45,14 @@ const UsersList = ({
         ))}
     </List>
   );
+};
+
+UsersList.propTypes = {
+  users: PropTypes.array.isRequired,
+  updatedUsers: PropTypes.array.isRequired,
+  toggleFollow: PropTypes.func.isRequired,
+  selectedOption: PropTypes.string.isRequired,
+  page: PropTypes.number.isRequired,
 };
 
 export default UsersList;

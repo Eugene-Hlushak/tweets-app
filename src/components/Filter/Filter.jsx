@@ -1,4 +1,5 @@
 import { FilterSelector, FilterBox, FilterLabel } from './Filter.styled';
+import PropTypes from 'prop-types';
 
 const Filter = ({ filterHandler }) => {
   return (
@@ -11,6 +12,10 @@ const Filter = ({ filterHandler }) => {
       </FilterSelector>
     </FilterBox>
   );
+};
+
+Filter.propTypes = {
+  filterHandler: PropTypes.func.isRequired,
 };
 
 export default Filter;

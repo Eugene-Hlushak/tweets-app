@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
   Card,
   CardTitle,
@@ -28,5 +29,8 @@ const UserCard = ({ user, toggleFollow }) => {
     </Card>
   );
 };
-
+UserCard.propTypes = {
+  user: PropTypes.shape({}).isRequired,
+  toggleFollow: PropTypes.func.isRequired,
+};
 export default UserCard;
