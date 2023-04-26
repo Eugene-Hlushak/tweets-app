@@ -1,14 +1,15 @@
-import { Link } from 'react-router-dom';
+import { Link, HeaderContainer, Nav, HeaderWrapper } from './Header.styled';
+
 const Header = () => {
   return (
-    <header>
-      <div>
-        <nav>
+    <HeaderWrapper>
+      <HeaderContainer>
+        <Nav>
           <Link to="/">Home</Link>
           <Link to="/tweets">Tweets</Link>
-        </nav>
-      </div>
-    </header>
+        </Nav>
+      </HeaderContainer>
+    </HeaderWrapper>
   );
 };
 

@@ -4,9 +4,10 @@ import {
   updateUserFollowers,
   getUsers,
 } from '../services/fetchUsers';
-import { PageContainer, LoadMoreBtn } from './Pages.styled';
+import { PageContainer, TweetsContainer, LoadMoreBtn } from './Pages.styled';
 import Filter from 'components/Filter/Filter';
 import UsersList from '../components/UsersList/UsersList';
+import Spinner from 'components/Spinner/Spinner';
 
 const Tweets = () => {
   const [users, setUsers] = useState([]);
@@ -23,7 +24,7 @@ const Tweets = () => {
     const fetchPageUsers = async () => {
       try {
         const result = await getUsers(page);
-        setUsers([...users, ...result]);
+        setUsers(prev => [...prev, ...result]);
       } catch (error) {}
     };
 
@@ -89,9 +90,10 @@ const Tweets = () => {
   return (
     <PageContainer>
       {isLoad ? (
-        <div>Loading...</div>
+        <Spinner />
       ) : (
-        <div>
+        <TweetsContainer>
+          
           <Filter filterHandler={filterHandler} />
           <UsersList
             users={users}
@@ -100,7 +102,7 @@ const Tweets = () => {
             selectedOption={option}
           />
           <LoadMoreBtn onClick={LoadMore}>LoadMore</LoadMoreBtn>
-        </div>
+        </TweetsContainer>
       )}
     </PageContainer>
   );
