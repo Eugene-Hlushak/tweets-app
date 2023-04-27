@@ -1,11 +1,11 @@
 # Tweets-App
 
 This web application displays user cards with their avatars, number of tweets
-and followers. You can also follow or unfollow a user, which will be reflected
-in the change in the number of followers and the appearance of the button.
-Updated data about the number of followers of the user is sent to the server.
-Added the ability to filter displayed users. All changes made by you will remain
-after reloading the page.
+and followers. Users are displayed using pagination - 3 per page.
+You can also follow or unfollow a user, which will be reflected in the change in the number of followers and the appearance of the button.
+Updated data about the number of followers of the user is sent to the backend.
+Added the ability to filter displayed users. The "Load more" button will be hidden if the default filter value is changed.
+All changes made by you will remain after reloading the page. 
 
 A personal backend was created in accordance with the requirements of the
 technical task:
