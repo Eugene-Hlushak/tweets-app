@@ -95,7 +95,9 @@ const Tweets = () => {
 
   return (
     <TweetsContainer>
-      {users.length > 0 && (
+      {isLoad ? (
+        <Spinner />
+      ) : (
         <>
           <Filter filterHandler={filterHandler} />
           <UsersList
@@ -110,7 +112,6 @@ const Tweets = () => {
           )}
         </>
       )}
-      {isLoad && <Spinner />}
     </TweetsContainer>
   );
 };
