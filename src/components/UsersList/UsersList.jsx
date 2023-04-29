@@ -23,8 +23,12 @@ const UsersList = ({ users, updatedUsers, toggleFollow, selectedOption }) => {
   return (
     <List>
       {visibleUsers.length > 0 &&
-        visibleUsers.map(user => (
-          <UserCard key={user.id} user={user} toggleFollow={toggleFollow} />
+        visibleUsers.map(visibleUser => (
+          <UserCard
+            key={visibleUser.id}
+            visibleUser={visibleUser}
+            toggleFollow={toggleFollow}
+          />
         ))}
     </List>
   );

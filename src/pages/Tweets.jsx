@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
+
 import {
   getAllUsers,
   updateUserFollowers,
   getUsers,
 } from '../services/fetchUsers';
-import { TweetsContainer, LoadMoreBtn } from './Pages.styled';
+import { TweetsContainer, LoadMoreBtn, ToHome } from './Pages.styled';
 import Filter from 'components/Filter/Filter';
 import UsersList from '../components/UsersList/UsersList';
 import Spinner from 'components/Spinner/Spinner';
@@ -95,6 +96,7 @@ const Tweets = () => {
 
   return (
     <TweetsContainer>
+      <ToHome to="/">Back to Home</ToHome>
       {isLoad ? (
         <Spinner />
       ) : (

@@ -48,6 +48,22 @@ export const Subtitle = styled.p`
   line-height: 22px;
 `;
 
+export const ToHome = styled(Link)`
+  display: inline-block;
+  /* width: 200px;
+  height: 53px; */
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 2px solid black;
+  border-radius: 8px;
+  text-decoration: none;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  text-transform: uppercase;
+`;
+
 export const ToTweets = styled(Link)`
   display: inline-block;
   width: 200px;

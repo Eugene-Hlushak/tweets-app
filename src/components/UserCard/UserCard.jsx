@@ -7,14 +7,14 @@ import {
   ImgThumb,
 } from './UserCard.styled';
 
-const UserCard = ({ user, toggleFollow }) => {
-  const { id, avatar, name, tweets, followers, isFollow } = user;
+const UserCard = ({ visibleUser, toggleFollow }) => {
+  const { id, avatar, user, tweets, followers, isFollow } = visibleUser;
   const formatFollowers = new Intl.NumberFormat('en').format(followers);
 
   return (
     <Card>
       <ImgThumb>
-        <UserImg src={avatar} alt={name} />
+        <UserImg src={avatar} alt={user} />
       </ImgThumb>
       <CardTitle>{tweets} tweets</CardTitle>
       <CardTitle style={{ marginBottom: '26px' }}>
@@ -30,7 +30,7 @@ const UserCard = ({ user, toggleFollow }) => {
   );
 };
 UserCard.propTypes = {
-  user: PropTypes.shape({}).isRequired,
+  visibleUser: PropTypes.shape({}).isRequired,
   toggleFollow: PropTypes.func.isRequired,
 };
 export default UserCard;
